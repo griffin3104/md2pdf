@@ -49,6 +49,18 @@ npm run dist:mac   # macOS 用 .dmg を作成（macOS 上で実行）
 npm run dist:win   # Windows 用インストーラを作成（Windows 上で実行）
 ```
 
+### リリース
+
+`v` で始まるタグを push すると、GitHub Actions が macOS（Apple Silicon / Intel）と Windows のインストーラをビルドして、
+[Releases](../../releases) に載せます。
+
+```
+git tag v0.1.0
+git push origin v0.1.0
+```
+
+タグを打たずにビルドだけ確認したいときは、GitHub の Actions タブから「Release」を手動実行します（`dist/` 相当の成果物が Artifacts に残ります）。
+
 ### 構成
 
 ```
