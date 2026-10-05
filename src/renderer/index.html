@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self'; script-src 'self'">
+  <title>md2pdf</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <h1>md2pdf</h1>
+    <button id="toggle-settings" type="button">設定</button>
+  </header>
+
+  <main id="view-main">
+    <div id="drop-zone" tabindex="0" role="button" aria-label="Markdown ファイルをドロップ、またはクリックして選択">
+      <p class="drop-title">ここに Markdown ファイルをドラッグ&amp;ドロップ</p>
+      <p class="drop-sub">またはクリックして選択（.md / .markdown）</p>
+      <p id="file-name" class="file-name" hidden></p>
+    </div>
+
+    <p class="css-line">使用する CSS: <strong id="css-current">既定</strong></p>
+
+    <button id="convert" type="button" class="primary" disabled>PDF化</button>
+
+    <div id="message" role="status" hidden></div>
+    <button id="show-folder" type="button" hidden>フォルダで開く</button>
+  </main>
+
+  <section id="view-settings" hidden>
+    <h2>CSS 設定</h2>
+    <p class="css-line">現在の CSS: <strong id="css-current-settings">既定</strong></p>
+    <div class="row">
+      <button id="choose-css" type="button">CSS を選択…</button>
+      <button id="reset-css" type="button">既定に戻す</button>
+    </div>
+    <h2>既定 CSS</h2>
+    <p class="hint">カスタム CSS を作るときの雛形として、同梱の既定 CSS を保存できます。</p>
+    <div class="row">
+      <button id="export-css" type="button">既定 CSS をエクスポート…</button>
+    </div>
+    <div id="settings-message" role="status" hidden></div>
+  </section>
+
+  <script src="renderer.js"></script>
+</body>
+</html>

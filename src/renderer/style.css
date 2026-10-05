@@ -1,0 +1,66 @@
+:root {
+  --bg: #f6f7f9;
+  --fg: #1f2933;
+  --muted: #616e7c;
+  --border: #c5ccd6;
+  --accent: #2563eb;
+  --accent-fg: #fff;
+  --ok: #15803d;
+  --warn: #b45309;
+  --err: #b91c1c;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #1b1f24;
+    --fg: #e6e9ee;
+    --muted: #9aa5b1;
+    --border: #3b434d;
+    --accent: #3b82f6;
+    --ok: #4ade80;
+    --warn: #fbbf24;
+    --err: #f87171;
+  }
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  padding: 16px 24px 24px;
+  background: var(--bg);
+  color: var(--fg);
+  font-family: -apple-system, "Hiragino Sans", "Yu Gothic UI", "Meiryo", sans-serif;
+  font-size: 14px;
+}
+header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; }
+h1 { font-size: 18px; margin: 0; }
+h2 { font-size: 15px; margin: 20px 0 8px; }
+button {
+  font: inherit;
+  padding: 7px 14px;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  background: transparent;
+  color: var(--fg);
+  cursor: pointer;
+}
+button:hover:not(:disabled) { border-color: var(--accent); }
+button:disabled { opacity: 0.45; cursor: not-allowed; }
+button.primary { background: var(--accent); color: var(--accent-fg); border-color: var(--accent); font-weight: bold; padding: 10px 28px; }
+#drop-zone {
+  border: 2px dashed var(--border);
+  border-radius: 10px;
+  padding: 48px 16px;
+  text-align: center;
+  cursor: pointer;
+}
+#drop-zone.over { border-color: var(--accent); background: rgba(37, 99, 235, 0.08); }
+.drop-title { font-size: 16px; margin: 0 0 6px; }
+.drop-sub { color: var(--muted); margin: 0; }
+.file-name { margin: 16px 0 0; font-weight: bold; word-break: break-all; }
+.css-line { color: var(--muted); margin: 14px 0; word-break: break-all; }
+.css-line strong { color: var(--fg); }
+.row { display: flex; gap: 8px; flex-wrap: wrap; }
+.hint { color: var(--muted); margin: 0 0 8px; }
+#message, #settings-message { margin: 14px 0 8px; white-space: pre-wrap; word-break: break-all; }
+.ok { color: var(--ok); }
+.warn { color: var(--warn); }
+.err { color: var(--err); }
