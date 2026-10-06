@@ -1,7 +1,8 @@
 name: Release
 
-# v で始まるタグ（例: v0.1.0）を push すると、Mac / Windows 用のインストーラをビルドして
-# GitHub Releases に載せる。手動実行（workflow_dispatch）ではビルドだけ行い、Releases には載せない。
+# v で始まるタグ（例: v0.9.1）を push すると、Mac / Windows 用のインストーラをビルドして、
+# 下書きの GitHub Release を 1 つ作る（内容を確認して、手動で Publish する）。
+# 手動実行（workflow_dispatch）ではビルドだけ行い、Release は作らない。
 on:
   push:
     tags:
@@ -12,6 +13,7 @@ permissions:
   contents: write
 
 jobs:
+  # 1. OS ごとにビルドして、インストーラを Artifacts に置く（Release はここでは作らない）
   build:
     strategy:
       fail-fast: false
@@ -32,24 +34,41 @@ jobs:
 
       - run: npm ci
 
-      # 署名はしない（証明書なし）。タグ push のときだけ Releases に公開する。
-      - name: Build and publish
-        if: startsWith(github.ref, 'refs/tags/')
-        run: npm run ${{ matrix.script }} -- --publish always
-        env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          CSC_IDENTITY_AUTO_DISCOVERY: 'false'
-
-      - name: Build only
-        if: ${{ !startsWith(github.ref, 'refs/tags/') }}
+      # 署名はしない（証明書なし）
+      - name: Build
         run: npm run ${{ matrix.script }} -- --publish never
         env:
           CSC_IDENTITY_AUTO_DISCOVERY: 'false'
 
       - uses: actions/upload-artifact@v4
-        if: ${{ !startsWith(github.ref, 'refs/tags/') }}
         with:
           name: installer-${{ matrix.os }}
           path: |
             dist/*.dmg
             dist/*.exe
+          if-no-files-found: error
+          retention-days: 7
+
+  # 2. すべてのビルドが成功したら、Release を 1 回だけ作る（タグを push したときのみ）
+  release:
+    needs: build
+    if: startsWith(github.ref, 'refs/tags/')
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          pattern: installer-*
+          merge-multiple: true
+          path: installers
+
+      - name: Create draft release
+        run: |
+          ls -l installers
+          gh release create "$TAG" installers/* \
+            --repo "$GITHUB_REPOSITORY" \
+            --title "$TAG" \
+            --generate-notes \
+            --draft
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          TAG: ${{ github.ref_name }}

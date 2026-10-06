@@ -55,15 +55,18 @@ npm run dist:win   # Windows 用インストーラを作成（Windows 上で実�
 
 ### リリース
 
-`v` で始まるタグを push すると、GitHub Actions が macOS（Apple Silicon / Intel）と Windows のインストーラをビルドして、
-[Releases](../../releases) に載せます。
+`package.json` の `version` を更新してコミットしたあと、`v` で始まるタグを push します。
+GitHub Actions が macOS（Apple Silicon / Intel）と Windows のインストーラをビルドして、
+[Releases](../../releases) に**下書き**を作ります。内容とリリースノートを確認して、「Publish release」で公開してください。
 
 ```
-git tag v0.1.0
-git push origin v0.1.0
+npm version 0.9.1 --no-git-tag-version   # package.json / package-lock.json を更新
+git commit -am "バージョンを 0.9.1 に更新" && git push
+git tag v0.9.1
+git push origin v0.9.1
 ```
 
-タグを打たずにビルドだけ確認したいときは、GitHub の Actions タブから「Release」を手動実行します（`dist/` 相当の成果物が Artifacts に残ります）。
+タグを打たずにビルドだけ確認したいときは、GitHub の Actions タブから「Release」を手動実行します（インストーラは Artifacts に 7 日間残ります）。
 
 ### 構成
 
