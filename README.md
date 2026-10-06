@@ -81,6 +81,10 @@ PDF 変換は、Electron 内蔵の Chromium（`printToPDF`）で行っていま�
 [marked](https://github.com/markedjs/marked) で HTML にし、コードは
 [highlight.js](https://highlightjs.org/)、図は mermaid で描画しています。
 
+## コントリビューション
+
+バグ報告、提案、プルリクエストを歓迎します。参加方法は [CONTRIBUTING.md](CONTRIBUTING.md) を参照してください。
+
 ## ライセンス
 
 [MIT License](LICENSE)
