@@ -74,7 +74,7 @@ src/renderer/   画面（ドラッグ&ドロップ、設定）
 src/assets/     同梱リソース（既定 CSS）
 samples/        動作確認用の Markdown
 scripts/        開発用スクリプト
-docs/           設計メモ（requirements.md: 要件メモ）
+docs/           設計メモ・手順書（requirements.md: 要件メモ / workflow.md: 作業・リリース手順書）
 ```
 
 PDF 変換は、Electron 内蔵の Chromium（`printToPDF`）で行っています。Markdown は
