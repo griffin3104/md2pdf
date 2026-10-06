@@ -8,6 +8,7 @@ const { pathToFileURL } = require('url');
 const { Marked } = require('marked');
 const { markedHighlight } = require('marked-highlight');
 const hljs = require('highlight.js');
+const { stripFrontMatter } = require('./frontmatter');
 
 // asar 内のファイルは別プロセスの Chromium から読めないので、unpack 済みのパスに差し替える
 const unpacked = (p) => p.replace(`app.asar${path.sep}`, `app.asar.unpacked${path.sep}`);
@@ -42,7 +43,7 @@ function createMarked() {
 }
 
 function renderHtml(mdPath, cssPath) {
-  const body = createMarked().parse(fs.readFileSync(mdPath, 'utf8'));
+  const body = createMarked().parse(stripFrontMatter(fs.readFileSync(mdPath, 'utf8')));
   const hljsCss = fs.readFileSync(HLJS_CSS, 'utf8');
   const css = fs.readFileSync(cssPath, 'utf8');
   // 相対パスの画像を Markdown のあるフォルダ基準で解決する

@@ -5,6 +5,7 @@ Markdown ファイルを、ドラッグ&ドロップで PDF に変換するデ�
 - 日本語の文書向けに調整した CSS を同梱（表紙、見出し、表、コードの構文ハイライト）
 - [mermaid](https://mermaid.js.org/) の図をそのまま PDF に描画
 - Markdown 内の画像（相対パス）に対応
+- Markdown 先頭の YAML フロントマター（`---` で囲まれたメタデータ）は、PDF には出力せず取り除く
 - CSS を好きなものに切り替え可能。同梱の既定 CSS はエクスポートして雛形にできる
 
 ## 使い方
@@ -25,10 +26,6 @@ Markdown ファイルを、ドラッグ&ドロップで PDF に変換するデ�
 
 指定した CSS ファイルが見つからないときは、既定の CSS で変換します。
 
-### 既知の制限
-
-- Markdown の先頭に YAML フロントマター（`---` で囲まれたメタデータ）があると、PDF が正しく出力されないことがあります。変換前にフロントマターを取り除いてください（対応予定）。
-
 ## インストール
 
 [Releases](../../releases) から、お使いの OS 用のファイルをダウンロードしてください。
@@ -48,6 +45,7 @@ Markdown ファイルを、ドラッグ&ドロップで PDF に変換するデ�
 ```
 npm install
 npm start          # アプリを起動
+npm test           # フロントマター除去のテスト
 npm run smoke      # GUI なしで samples/sample.md を out/smoke.pdf に変換（動作確認用）
 npm run dist:mac   # macOS 用 .dmg を作成（macOS 上で実行）
 npm run dist:win   # Windows 用インストーラを作成（Windows 上で実行）
