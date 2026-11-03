@@ -64,7 +64,7 @@ git tag v0.9.1
 git push origin v0.9.1
 ```
 
-タグを打たずにビルドだけ確認したいときは、GitHub の Actions タブから「Release」を手動実行します（インストーラは Artifacts に 7 日間残ります）。
+タグを打たずにビルドだけ確認したいときは、GitHub の Actions タブから「Release」を手動実行します（インストーラは Artifacts に 3 日間残ります）。
 
 ### 構成
 

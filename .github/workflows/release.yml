@@ -47,7 +47,7 @@ jobs:
             dist/*.dmg
             dist/*.exe
           if-no-files-found: error
-          retention-days: 7
+          retention-days: 3
 
   # 2. すべてのビルドが成功したら、Release を 1 回だけ作る（タグを push したときのみ）
   release:
