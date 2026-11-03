@@ -211,7 +211,7 @@ md2pdf X.Y.Z です。（変更の要約を 1 行）
 gh workflow run release.yml --ref main
 ```
 
-GitHub の Actions タブ →「Release」→ **Run workflow** でも実行できます。インストーラは、実行結果のページの **Artifacts** に 7 日間残ります（`release` ジョブは動かないため、Releases には載りません）。
+GitHub の Actions タブ →「Release」→ **Run workflow** でも実行できます。インストーラは、実行結果のページの **Artifacts** に 3 日間残ります（`release` ジョブは動かないため、Releases には載りません）。
 
 ### 4.8 ローカルでインストーラを作る
 
